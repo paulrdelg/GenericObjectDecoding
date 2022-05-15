@@ -46,19 +46,22 @@ def main():
     res_pt['profile_correlation_image'] = [corrcoef(t, p, var='col')
                                            for t, p in zip(res_pt['true_feature_averaged'],
                                                            res_pt['predicted_feature_averaged'])]
-    res_pt['mean_profile_correlation_image'] = res_pt.loc[:, 'profile_correlation_image'].apply(np.nanmean)
+    res_pt['mean_profile_correlation_image'] = res_pt.loc[:,
+        'profile_correlation_image'].apply(np.nanmean)
 
     # Profile correlation (category, seen)
     res_pt['profile_correlation_cat_percept'] = [corrcoef(t, p, var='col')
                                                  for t, p in zip(res_pt['category_feature_averaged'],
                                                                  res_pt['predicted_feature_averaged'])]
-    res_pt['mean_profile_correlation_cat_percept'] = res_pt.loc[:, 'profile_correlation_cat_percept'].apply(np.nanmean)
+    res_pt['mean_profile_correlation_cat_percept'] = res_pt.loc[:,
+        'profile_correlation_cat_percept'].apply(np.nanmean)
 
     # Profile correlation (category, imagined)
     res_im['profile_correlation_cat_imagery'] = [corrcoef(t, p, var='col')
                                                  for t, p in zip(res_im['category_feature_averaged'],
                                                                  res_im['predicted_feature_averaged'])]
-    res_im['mean_profile_correlation_cat_imagery'] = res_im.loc[:, 'profile_correlation_cat_imagery'].apply(np.nanmean)
+    res_im['mean_profile_correlation_cat_imagery'] = res_im.loc[:,
+        'profile_correlation_cat_imagery'].apply(np.nanmean)
 
     # Merge results
     results_merged = pd.merge(res_pt, res_im, on=['subject', 'roi', 'feature'])

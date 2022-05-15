@@ -53,8 +53,10 @@ if __name__ == "__main__":
             # Load unit result file
             print "Loading feature prediction results from mat files"
 
-            flist = glob.glob(os.path.join(result_dir, sbj, roi, feat, "unit*.mat"))
-            flist_unit = [f for f in flist if os.path.split(f)[1] != 'unit_all.mat']
+            flist = glob.glob(os.path.join(
+                result_dir, sbj, roi, feat, "unit*.mat"))
+            flist_unit = [f for f in flist if os.path.split(f)[
+                                                            1] != 'unit_all.mat']
             flist_unit.sort()
 
             results_unit = []

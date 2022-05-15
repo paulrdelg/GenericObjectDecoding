@@ -34,9 +34,11 @@ def main():
     # CNN model settings
     model_def = './data/cnn/bvlc_reference_caffenet/bvlc_reference_caffenet.prototxt'
     model_param = './data/cnn/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel'
-    cnn_layers = ['conv1', 'conv2', 'conv3', 'conv4', 'conv5', 'fc6', 'fc7', 'fc8']
+    cnn_layers = ['conv1', 'conv2', 'conv3',
+        'conv4', 'conv5', 'fc6', 'fc7', 'fc8']
 
-    mean_image_file = './data/images/ilsvrc_2012_mean.npy' # ImageNet Large Scale Visual Recognition Challenge 2012
+    # ImageNet Large Scale Visual Recognition Challenge 2012
+    mean_image_file = './data/images/ilsvrc_2012_mean.npy'
 
     # Results file
     data_dir = './data'
@@ -56,7 +58,8 @@ def main():
         os.makedirs(featuredir)
 
     # Load CNN model ---------------------------------------------------------
-    model = CnnModel(model_def, model_param, mean_image_file, batch_size=128, rand_seed=rand_seed)
+    model = CnnModel(model_def, model_param, mean_image_file,
+                     batch_size=128, rand_seed=rand_seed)
 
     # Get image features for traning images ----------------------------------
     features_train = get_image_features(model, './data/images/image_training',
@@ -152,11 +155,13 @@ class CnnModel(object):
 
         # Prepare a mean image
         img_mean = np.load(mean_image)
-        img_mean = np.float32([img_mean[0].mean(), img_mean[1].mean(), img_mean[2].mean()])
+        img_mean = np.float32(
+            [img_mean[0].mean(), img_mean[1].mean(), img_mean[2].mean()])
 
         # Init the model
         channel_swap = (2, 1, 0)
-        self.net = caffe.Classifier(model_def, model_param, mean=img_mean, channel_swap=channel_swap)
+        self.net = caffe.Classifier(
+            model_def, model_param, mean=img_mean, channel_swap=channel_swap)
 
         h, w = self.net.blobs['data'].data.shape[-2:]
         self.image_size = (h, w)
@@ -166,7 +171,8 @@ class CnnModel(object):
 
         ## Init select feature index
         # FIXME
-        layers = ('conv1', 'conv2', 'conv3', 'conv4', 'conv5', 'fc6', 'fc7', 'fc8')
+        layers = ('conv1', 'conv2', 'conv3', 'conv4',
+                  'conv5', 'fc6', 'fc7', 'fc8')
         self.feat_index = {}
         self.feat_index = {lay: np.random.permutation(self.net.blobs[lay].data[0].flatten().size)
                            for lay in layers}
@@ -196,18 +202,22 @@ class CnnModel(object):
 
         for i, imgind in enumerate(image_index):
             for j, k in enumerate(imgind):
-                img = imresize(PIL.Image.open(images[k]).convert('RGB'), (h, w), interp='bicubic')
-                img = np.float32(np.transpose(img, (2, 0, 1))[::-1]) - np.reshape(mean_image, (3, 1, 1))
+                img = imresize(PIL.Image.open(images[k]).convert(
+                    'RGB'), (h, w), interp='bicubic')
+                img = np.float32(np.transpose(img, (2, 0, 1))[
+                                 ::-1]) - np.reshape(mean_image, (3, 1, 1))
                 self.net.blobs['data'].data[j] = img
 
             self.net.forward(end=layers[-1])
 
             for j, k in enumerate(imgind):
                 if not feature_num == 0:
-                    feat_list = [self.net.blobs[lay].data[j].flatten()[self.feat_index[lay][:feature_num]] for lay in layers]
+                    feat_list = [self.net.blobs[lay].data[j].flatten(
+                    )[self.feat_index[lay][:feature_num]] for lay in layers]
                 else:
                     # Returns all features
-                    feat_list = [self.net.blobs[lay].data[j].flatten() for lay in layers]
+                    feat_list = [self.net.blobs[lay].data[j].flatten()
+                                                                     for lay in layers]
                 feature_all.append(feat_list)
 
         feature_all = np.array(feature_all)

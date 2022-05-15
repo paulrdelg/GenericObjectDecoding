@@ -111,7 +111,8 @@ def get_pwident_correctrate(simmat):
         pred_feat = simmat[i, :]
         correct_feat = pred_feat[labels[i]]
         pred_num = len(pred_feat) - 1
-        correct_rate.append((pred_num - np.sum(pred_feat > correct_feat)) / float(pred_num))
+        correct_rate.append(
+            (pred_num - np.sum(pred_feat > correct_feat)) / float(pred_num))
 
     return correct_rate
 

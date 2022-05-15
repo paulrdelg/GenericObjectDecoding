@@ -9,18 +9,19 @@ Analysis summary
 - Results format:    Pandas dataframe
 '''
 
-
+# Standard Python Imports
 from __future__ import print_function
-
 import os
 import pickle
 from itertools import product
 from time import time
 
+# Popular Third-Party Imports
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LinearRegression  # For quick demo
 
+# Special Third-Party Imports
 import bdpy
 from bdpy.bdata import concat_dataset
 from bdpy.ml import add_bias
@@ -29,6 +30,7 @@ from bdpy.stats import corrcoef
 from bdpy.util import makedir_ifnot, get_refdata
 from bdpy.distcomp import DistComp
 
+# Local Imports
 import god_config as config
 
 
@@ -114,7 +116,8 @@ def main():
         # For quick demo, reduce the number of units from 1000 to 100
         y = y[:, :100]
 
-        y_sorted = get_refdata(y, y_label, labels)  # Image features corresponding to brain data
+        # Image features corresponding to brain data
+        y_sorted = get_refdata(y, y_label, labels)
 
         # Get training and test dataset
         i_train = (datatype == 1).flatten()    # Index for training
@@ -154,16 +157,23 @@ def main():
             = get_averaged_feature(pred_y_im, true_y_im, test_label_im)
 
         # Get category averaged features
-        catlabels_pt = np.vstack([int(n) for n in test_label_pt])  # Category labels (perception test)
-        catlabels_im = np.vstack([int(n) for n in test_label_im])  # Category labels (imagery test)
-        catlabels_set_pt = np.unique(catlabels_pt)                 # Category label set (perception test)
-        catlabels_set_im = np.unique(catlabels_im)                 # Category label set (imagery test)
+        # Category labels (perception test)
+        catlabels_pt = np.vstack([int(n) for n in test_label_pt])
+        # Category labels (imagery test)
+        catlabels_im = np.vstack([int(n) for n in test_label_im])
+        # Category label set (perception test)
+        catlabels_set_pt = np.unique(catlabels_pt)
+        # Category label set (imagery test)
+        catlabels_set_im = np.unique(catlabels_im)
 
-        y_catlabels = data_feature.select('CatID')   # Category labels in image features
+        # Category labels in image features
+        y_catlabels = data_feature.select('CatID')
         ind_catave = (data_feature.select('FeatureType') == 3).flatten()
 
-        y_catave_pt = get_refdata(y[ind_catave, :], y_catlabels[ind_catave, :], catlabels_set_pt)
-        y_catave_im = get_refdata(y[ind_catave, :], y_catlabels[ind_catave, :], catlabels_set_im)
+        y_catave_pt = get_refdata(
+            y[ind_catave, :], y_catlabels[ind_catave, :], catlabels_set_pt)
+        y_catave_im = get_refdata(
+            y[ind_catave, :], y_catlabels[ind_catave, :], catlabels_set_im)
 
         # Prepare result dataframe
         results = pd.DataFrame({'subject': [sbj, sbj],
@@ -247,7 +257,8 @@ def feature_prediction(x_train, y_train, x_test, y_test, n_voxel=500, n_iter=200
         # Voxel selection
         corr = corrcoef(y_train_unit, x_train, var='col')
 
-        x_train_unit, voxel_index = select_top(x_train, np.abs(corr), n_voxel, axis=1, verbose=False)
+        x_train_unit, voxel_index = select_top(
+            x_train, np.abs(corr), n_voxel, axis=1, verbose=False)
         x_test_unit = x_test[:, voxel_index]
 
         # Add bias terms
@@ -286,8 +297,10 @@ def get_averaged_feature(pred_y, true_y, labels):
 
     labels_set = np.unique(labels)
 
-    pred_y_av = np.array([np.mean(pred_y[labels == c, :], axis=0) for c in labels_set])
-    true_y_av = np.array([np.mean(true_y[labels == c, :], axis=0) for c in labels_set])
+    pred_y_av = np.array([np.mean(pred_y[labels == c, :], axis=0)
+                         for c in labels_set])
+    true_y_av = np.array([np.mean(true_y[labels == c, :], axis=0)
+                         for c in labels_set])
 
     return pred_y_av, true_y_av, labels_set
 

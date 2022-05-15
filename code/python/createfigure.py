@@ -20,8 +20,10 @@ import god_config as config
 
 def main():
     results_file = config.results_file
-    output_file_featpred = os.path.join('results', config.analysis_name + '_featureprediction.pdf')
-    output_file_catident = os.path.join('results', config.analysis_name + '_categoryidentification.pdf')
+    output_file_featpred = os.path.join(
+        'results', config.analysis_name + '_featureprediction.pdf')
+    output_file_catident = os.path.join(
+        'results', config.analysis_name + '_categoryidentification.pdf')
 
     roi_label = config.roi_labels
 
