@@ -1,17 +1,19 @@
 '''Merge results of analysis_FeaturePrediction.py'''
 
 
+# Standard Python Imports
 from __future__ import print_function
-
 import os
 import pickle
 
+# Popular Third-Party Imports
 import numpy as np
 import pandas as pd
 
-import bdpy
+# Special Third-Party Imports
 from bdpy.stats import corrcoef
 
+# Local Imports
 import god_config as config
 
 
@@ -47,21 +49,21 @@ def main():
                                            for t, p in zip(res_pt['true_feature_averaged'],
                                                            res_pt['predicted_feature_averaged'])]
     res_pt['mean_profile_correlation_image'] = res_pt.loc[:,
-        'profile_correlation_image'].apply(np.nanmean)
+                                                          'profile_correlation_image'].apply(np.nanmean)
 
     # Profile correlation (category, seen)
     res_pt['profile_correlation_cat_percept'] = [corrcoef(t, p, var='col')
                                                  for t, p in zip(res_pt['category_feature_averaged'],
                                                                  res_pt['predicted_feature_averaged'])]
     res_pt['mean_profile_correlation_cat_percept'] = res_pt.loc[:,
-        'profile_correlation_cat_percept'].apply(np.nanmean)
+                                                                'profile_correlation_cat_percept'].apply(np.nanmean)
 
     # Profile correlation (category, imagined)
     res_im['profile_correlation_cat_imagery'] = [corrcoef(t, p, var='col')
                                                  for t, p in zip(res_im['category_feature_averaged'],
                                                                  res_im['predicted_feature_averaged'])]
     res_im['mean_profile_correlation_cat_imagery'] = res_im.loc[:,
-        'profile_correlation_cat_imagery'].apply(np.nanmean)
+                                                                'profile_correlation_cat_imagery'].apply(np.nanmean)
 
     # Merge results
     results_merged = pd.merge(res_pt, res_im, on=['subject', 'roi', 'feature'])
@@ -82,7 +84,7 @@ def main():
     results_merged.drop('test_type_x', axis=1, inplace=True)
     results_merged.drop('test_type_y', axis=1, inplace=True)
 
-    # Save the merged dataframe ----------------------------------------    
+    # Save the merged dataframe ----------------------------------------
     with open(output_file, 'wb') as f:
         pickle.dump(results_merged, f)
     print('Saved %s' % output_file)

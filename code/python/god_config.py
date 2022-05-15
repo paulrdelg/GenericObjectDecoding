@@ -37,7 +37,7 @@ num_voxel = {'VC': 1000,
 
 image_feature_file = 'data/ImageFeatures.h5'
 features = ['cnn1', 'cnn2', 'cnn3', 'cnn4', 'cnn5', 'cnn6',
-    'cnn7', 'cnn8', 'hmax1', 'hmax2', 'hmax3', 'gist', 'sift']
+            'cnn7', 'cnn8', 'hmax1', 'hmax2', 'hmax3', 'gist', 'sift']
 
 # Results settings
 results_dir = os.path.join('results', analysis_name)

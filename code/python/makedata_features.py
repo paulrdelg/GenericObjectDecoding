@@ -35,7 +35,7 @@ def main():
     model_def = './data/cnn/bvlc_reference_caffenet/bvlc_reference_caffenet.prototxt'
     model_param = './data/cnn/bvlc_reference_caffenet/bvlc_reference_caffenet.caffemodel'
     cnn_layers = ['conv1', 'conv2', 'conv3',
-        'conv4', 'conv5', 'fc6', 'fc7', 'fc8']
+                  'conv4', 'conv5', 'fc6', 'fc7', 'fc8']
 
     # ImageNet Large Scale Visual Recognition Challenge 2012
     mean_image_file = './data/images/ilsvrc_2012_mean.npy'
