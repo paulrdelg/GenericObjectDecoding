@@ -5,24 +5,25 @@ This file is a part of GenericDecoding_demo.
 '''
 
 
+# Standard Python Imports
 from __future__ import print_function
-
-import os
 import pickle
 
+# Popular Third-Party Imports
 import numpy as np
 import pandas as pd
 
+# Special Third-Party Imports
 import bdpy
 from bdpy.stats import corrmat
 
+# Local Imports
 import god_config as config
 
 
 # Main #################################################################
 
 def main():
-    results_dir = config.results_dir
     output_file = config.results_file
 
     image_feature_file = config.image_feature_file
@@ -40,8 +41,6 @@ def main():
     feature_list = results['feature']
     pred_percept = results['predicted_feature_averaged_percept']
     pred_imagery = results['predicted_feature_averaged_imagery']
-    cat_label_percept = results['category_label_set_percept']
-    cat_label_imagery = results['category_label_set_imagery']
     cat_feature_percept = results['category_feature_averaged_percept']
     cat_feature_imagery = results['category_feature_averaged_imagery']
 

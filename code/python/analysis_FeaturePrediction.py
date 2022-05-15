@@ -273,9 +273,10 @@ def feature_prediction(x_train, y_train, x_test, y_test, n_voxel=500, n_iter=200
         try:
             model.fit(x_train_unit, y_train_unit)  # Training
             y_pred = model.predict(x_test_unit)    # Test
-        except:
+        except Exception as e:
             # When SLiR failed, returns zero-filled array as predicted features
             y_pred = np.zeros(y_test_unit.shape)
+            print(f'SLiR failed: {e}')
 
         # Denormalize predicted features
         y_pred = y_pred * norm_scale_y + norm_mean_y
