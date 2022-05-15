@@ -62,16 +62,16 @@ if __name__ == "__main__":
                 print 'Loading %s' % f
 
                 dat = h5py.File(f)
-                results_unit.append({'subject' : sbj,
-                                     'roi' : roi,
-                                     'feature' : feat,
-                                     'unit' : i + 1,
-                                     'predict_percept' : np.array(dat['predict']['percept']).flatten(),
-                                     'predict_imagery' : np.array(dat['predict']['imagery']).flatten(),
-                                     'predict_percept_catave' : np.array(dat['predict']['perceptCatAve']).flatten(),
-                                     'predict_imagery_catave' : np.array(dat['predict']['imageryCatAve']).flatten(),
-                                     'category_test_percept' : np.array(dat['predict']['categoryImagery']).flatten(),
-                                     'category_test_imagery' : np.array(dat['predict']['categoryPercept']).flatten()})
+                results_unit.append({'subject': sbj,
+                                     'roi': roi,
+                                     'feature': feat,
+                                     'unit': i + 1,
+                                     'predict_percept': np.array(dat['predict']['percept']).flatten(),
+                                     'predict_imagery': np.array(dat['predict']['imagery']).flatten(),
+                                     'predict_percept_catave': np.array(dat['predict']['perceptCatAve']).flatten(),
+                                     'predict_imagery_catave': np.array(dat['predict']['imageryCatAve']).flatten(),
+                                     'category_test_percept': np.array(dat['predict']['categoryImagery']).flatten(),
+                                     'category_test_imagery': np.array(dat['predict']['categoryPercept']).flatten()})
 
             # Save unit results
             print "Saving %s" % result_unit_file

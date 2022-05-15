@@ -19,7 +19,6 @@ from time import time
 
 import numpy as np
 import pandas as pd
-from scipy import stats
 from sklearn.linear_model import LinearRegression  # For quick demo
 
 import bdpy
@@ -28,9 +27,7 @@ from bdpy.ml import add_bias
 from bdpy.preproc import select_top
 from bdpy.stats import corrcoef
 from bdpy.util import makedir_ifnot, get_refdata
-from bdpy.dataform import append_dataframe
 from bdpy.distcomp import DistComp
-from slir import SparseLinearRegression
 
 import god_config as config
 
@@ -169,18 +166,18 @@ def main():
         y_catave_im = get_refdata(y[ind_catave, :], y_catlabels[ind_catave, :], catlabels_set_im)
 
         # Prepare result dataframe
-        results = pd.DataFrame({'subject' : [sbj, sbj],
-                                'roi' : [roi, roi],
-                                'feature' : [feat, feat],
-                                'test_type' : ['perception', 'imagery'],
+        results = pd.DataFrame({'subject': [sbj, sbj],
+                                'roi': [roi, roi],
+                                'feature': [feat, feat],
+                                'test_type': ['perception', 'imagery'],
                                 'true_feature': [true_y_pt, true_y_im],
                                 'predicted_feature': [pred_y_pt, pred_y_im],
-                                'test_label' : [test_label_pt, test_label_im],
-                                'test_label_set' : [test_label_set_pt, test_label_set_im],
-                                'true_feature_averaged' : [true_y_pt_av, true_y_im_av],
-                                'predicted_feature_averaged' : [pred_y_pt_av, pred_y_im_av],
-                                'category_label_set' : [catlabels_set_pt, catlabels_set_im],
-                                'category_feature_averaged' : [y_catave_pt, y_catave_im]})
+                                'test_label': [test_label_pt, test_label_im],
+                                'test_label_set': [test_label_set_pt, test_label_set_im],
+                                'true_feature_averaged': [true_y_pt_av, true_y_im_av],
+                                'predicted_feature_averaged': [pred_y_pt_av, pred_y_im_av],
+                                'category_label_set': [catlabels_set_pt, catlabels_set_im],
+                                'category_feature_averaged': [y_catave_pt, y_catave_im]})
 
         # Save results
         makedir_ifnot(os.path.dirname(results_file))

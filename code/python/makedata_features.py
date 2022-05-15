@@ -86,7 +86,7 @@ def main():
     featuretype_arrays = []
     categoryid_arrays = []
     imageid_arrays = []
-    features_dict = {lay : [] for lay in cnn_layers}
+    features_dict = {lay: [] for lay in cnn_layers}
 
     for i, feat in enumerate(features_list):
         n_sample = len(feat.index)

@@ -64,16 +64,16 @@ def main():
     results_merged = pd.merge(res_pt, res_im, on=['subject', 'roi', 'feature'])
 
     # Rename columns
-    results_merged = results_merged.rename(columns={'test_label_set_x' : 'test_label_set_percept',
-                                                    'test_label_set_y' : 'test_label_set_imagery',
-                                                    'true_feature_averaged_x' : 'true_feature_averaged_percept',
-                                                    'true_feature_averaged_y' : 'true_feature_averaged_imagery',
-                                                    'predicted_feature_averaged_x' : 'predicted_feature_averaged_percept',
-                                                    'predicted_feature_averaged_y' : 'predicted_feature_averaged_imagery',
-                                                    'category_label_set_x' : 'category_label_set_percept',
-                                                    'category_label_set_y' : 'category_label_set_imagery',
-                                                    'category_feature_averaged_x' : 'category_feature_averaged_percept',
-                                                    'category_feature_averaged_y' : 'category_feature_averaged_imagery'})
+    results_merged = results_merged.rename(columns={'test_label_set_x': 'test_label_set_percept',
+                                                    'test_label_set_y': 'test_label_set_imagery',
+                                                    'true_feature_averaged_x': 'true_feature_averaged_percept',
+                                                    'true_feature_averaged_y': 'true_feature_averaged_imagery',
+                                                    'predicted_feature_averaged_x': 'predicted_feature_averaged_percept',
+                                                    'predicted_feature_averaged_y': 'predicted_feature_averaged_imagery',
+                                                    'category_label_set_x': 'category_label_set_percept',
+                                                    'category_label_set_y': 'category_label_set_imagery',
+                                                    'category_feature_averaged_x': 'category_feature_averaged_percept',
+                                                    'category_feature_averaged_y': 'category_feature_averaged_imagery'})
 
     # Drop unnecessary columns
     results_merged.drop('test_type_x', axis=1, inplace=True)
