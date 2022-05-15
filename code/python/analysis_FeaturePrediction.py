@@ -235,7 +235,7 @@ def feature_prediction(x_train, y_train, x_test, y_test, n_voxel=500, n_iter=200
 
         # Get unit features
         y_train_unit = y_train[:, i]
-        y_test_unit =  y_test[:, i]
+        y_test_unit = y_test[:, i]
 
         # Normalize image features for training (y_train_unit)
         norm_mean_y = np.mean(y_train_unit, axis=0)
@@ -257,7 +257,6 @@ def feature_prediction(x_train, y_train, x_test, y_test, n_voxel=500, n_iter=200
         # Setup regression
         # For quick demo, use linaer regression
         model = LinearRegression()
-        #model = SparseLinearRegression(n_iter=n_iter, prune_mode=1)
 
         # Training and test
         try:
