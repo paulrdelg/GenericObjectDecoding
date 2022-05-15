@@ -4,10 +4,11 @@ This is Python code for Generic Decoding Demo.
 
 ## Requirements
 
-All scripts are tested with Python 2.7.13.
+All scripts are tested with Python 3.10.4.
 The following packages are required.
 
 - [bdpy](https://github.com/KamitaniLab/bdpy)
+- [git+https://github.com/KamitaniLab/slir.git](https://github.com/KamitaniLab/slir)
 - numpy
 - scipy
 - pandas

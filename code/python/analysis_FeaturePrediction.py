@@ -13,7 +13,6 @@ Analysis summary
 from __future__ import print_function
 
 import os
-import sys
 import pickle
 from itertools import product
 from time import time
@@ -21,8 +20,6 @@ from time import time
 import numpy as np
 import pandas as pd
 from scipy import stats
-
-from slir import SparseLinearRegression
 from sklearn.linear_model import LinearRegression  # For quick demo
 
 import bdpy
@@ -33,6 +30,7 @@ from bdpy.stats import corrcoef
 from bdpy.util import makedir_ifnot, get_refdata
 from bdpy.dataform import append_dataframe
 from bdpy.distcomp import DistComp
+from slir import SparseLinearRegression
 
 import god_config as config
 

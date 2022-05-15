@@ -1,0 +1,8 @@
+numpy
+pandas
+scikit-learn
+scipy
+matplotlib
+Pillow
+git+https://github.com/KamitaniLab/slir.git
+bdpy
